@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/estilosVuelos.css"
+    
+</head>
+<body>
+
+    
+    <div class="datatable-container">
+        <div class="header-tools">
+            <div class="tools">
+                <ul>
+                    <li><span><input type="checkbox"></span></li>  
+                    <li>
+                        <button  onclick="location.href='javascript:abrir()'">
+                            <i class="material-icons">add_circle</i>
+                            
+                        </button>
+                    </li>
+                    
+                    <li>
+                        <button>
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </li>
+                    
+                    <li>
+                        <button onclick="location.href='javascript:abrirB()'">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </li>
+                    
+                    <li>
+                        <button onclick="location.href='javascript:mostrar()'">
+                            <i class="material-icons">autorenew</i>
+                        </button>
+                    </li>
+                    
+                 </ul>
+            </div>
+            <div class="search">
+                <input type="text" name="" id="" class="search-input">
+            </div>
+        </div>
+        
+        <div class="datatable" id="vuelos">
+            "<p>" + Numero + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Hora + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Fecha + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Piloto + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Puerta + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Origen + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Destino + "</p>"
+        </div>
+
+        <div class="ventana" id="vent">
+            <h2>Añadir vuelo</h2>
+            <form>  
+                <input type="text" id="hora" placeholder="Hora (hh:mm)">  
+                <input type="text" id="fecha" placeholder="Fecha (DD-MM-AAAA)">     
+                <input type="text" id="piloto" placeholder="Piloto">    
+                <input type="number" id="numPuerta" placeholder="Numero de la Puerta">
+                <input type="text" id="origen" placeholder="Origen">
+                <input type="text" id="destino" placeholder="Destino">  
+                <input type="boolean" id="estado" placeholder="true/false"></input>
+                <button onclick="crearVuelo()">Añadir</button> 
+            </form>
+        </div>
+
+        <div class="ventanaB" id="ventB">
+            <h2>Borrar vuelo</h2>
+            <form>  
+                <input type="number" id="numero" placeholder="Numero de vuelo a borrar">  
+                <button onclick="borrarVuelo()">Borrar</button> 
+            </form>
+        </div>
+
+        
+
+    </div>
+
+<script lang="javascript">
+    async function crearVuelo() {
+        let datos = { };
+        datos.hora = document.getElementById("hora").value;
+        datos.fecha = document.getElementById("fecha").value;
+        datos.piloto = document.getElementById("piloto").value; 
+        datos.numPuerta = document.getElementById("numPuerta").value;
+        datos.origen = document.getElementById("origen").value;
+        datos.destino = document.getElementById("destino").value;
+        datos.estado = document.getElementById("estado").value;
+        const resultado = await fetch('/vuelo', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        }).then(info => console.log(info));
+        alert("El vuelo se creo con éxito!")
+    }
+</script>
+
+<script>
+    function abrir(){
+        document.getElementById("vent").style.display="block";
+    }
+</script>
+
+<script>
+    function abrirB(){
+        document.getElementById("ventB").style.display="block";
+    }
+    async function mostrar(){
+        let vuelos=document.getElementById("vuelos")
+        const resultado = await fetch('/vuelo/all', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+                
+            },
+            
+        }).then(r => r.json()).then(info => info.forEach(vuelo => document.getElementById("vuelos").innerHTML += "<p>" + vuelo.numero + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.hora + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.fecha + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.piloto + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.numPuerta + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.origen + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + vuelo.destino + "</p>"));
+        
+    }
+</script>
+
+<script lang="javascript">
+    async function borrarVuelo(){
+        let datos = { };
+        datos.numero = document.getElementById("numero").value;
+        const resultado = await fetch('/vuelo/'+datos.numero+'/delete', {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        }).then(info => console.log(info));
+        alert("El vuelo se borro con éxito!")
+    }
+</script>
+
+
+</body>
+</html>

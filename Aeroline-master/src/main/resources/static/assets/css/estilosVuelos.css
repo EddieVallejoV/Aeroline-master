@@ -1,0 +1,245 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+
+:root{
+    --primary-color: white;
+    --secondary-color: rgb(61, 68, 73);
+    --highlight-color: #ff8000;
+
+    --dt-status-ontime-color: greenyellow;
+    --dt-status-delayed-color: lightsalmon;
+
+    --dt-padding: 12px;
+    --dt-padding-s: 6px;
+    --dt-padding-xs: 2px;
+
+    --dt-border-radius: 3px;
+
+    --dt-background-color-container: #2a3338;
+    --dt-border-color:var(--secondary-color);
+    --dt-bg-color: var(--highlight-color);
+    --dt-text-color: var(--primary-color);
+    --dt-bg-active-button: var(--highlight-color);
+    --dt-text-color-button: var(--primary-color);
+    --dt-text-color-active-button: var(--primary-color);
+    --dt-hover-cell-color: var(--highlight-color);
+    --dt-even-row-color: var(--secondary-color);
+    --dt-focus-color: var(--highlight-color);
+    --dt-input-background-color: var(--secondary-color);
+    --dt-input-color: var(--primary-color);
+}
+
+body{
+    background-image: url(../Image/bgData.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.material-icons{
+    font-size: 16px;
+}
+
+.datatable-container{
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--dt-background-color-container);
+    border-radius: var(--dt-border-radius);
+    color: var(--dt-text-color);
+    width: 800px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.datatable-container .header-tools{
+    border-bottom: solid 1px var(--dt-border-color);
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+
+.datatable-container .header-tools .search{
+    width: 30%;
+}
+
+.datatable-container .header-tools .search .search-input{
+    width: 100%;
+    background-color: var(--dt-input-background-color);
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--dt-border-radius);
+    border: solid 1px var(--dt-border-color);
+    color: var(--dt-input-color);
+}
+
+.datatable-container .header-tools .tools{
+    width: 70%;
+}
+
+.datatable-container .header-tools .tools ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+}
+
+.datatable-container .header-tools .tools ul li{
+    display: inline-block;
+    margin: 0 var(--dt-padding-xs);
+    align-items: baseline;
+}
+
+.datatable-container .header-tools .tools ul li button{
+    color: var(--dt-text-color-button);
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: var(--dt-border-radius);
+    background: transparent;
+    cursor: pointer;
+    padding: var(--dt-padding-s) var(--dt-padding);
+}
+
+.datatable-container .header-tools .tools ul li button:hover{
+    color: var(--dt-text-color-active-button);
+    background: var(--dt-bg-active-button);
+}
+
+.datatable-container .datatable{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.datatable-container .datatable, .datatable-container .datatable th, .datatable-container .datatable td{
+    padding: var(--dt-padding) var(--dt-padding);
+}
+
+.datatable-container .datatable th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: solid 1px var(--dt-border-color);
+}
+
+.datatable-container .datatable td{
+    border-bottom: solid 1px var(--dt-border-color);
+}
+
+.datatable-container .datatable tbody tr:nth-child(even){
+    background-color: var(--dt-even-row-color);
+}
+
+.datatable-container .datatable tbody tr:hover{
+    background-color: var(--dt-hover-cell-color);
+}
+
+.datatable-container .datatable tbody tr .ontime::after,.datatable-container .datatable tbody tr .delayed::after{
+   display: inline-block;
+   vertical-align: middle; 
+}
+
+.datatable-container .datatable tbody tr .ontime::after{
+    content: 'A tiempo';
+    color: var(--dt-status-ontime-color);
+}
+
+.datatable-container .datatable tbody tr .delayed::after{
+    content: 'Tarde';
+    color: var(--dt-status-delayed-color);
+}
+
+.datatable-container .datatable tbody tr .ontime::before,.datatable-container .datatable tbody tr .delayed::before{
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+ }
+
+ .datatable-container .datatable tbody tr .ontime::before{
+    background-color: var(--dt-status-ontime-color);
+}
+
+.datatable-container .datatable tbody tr .delayed::before{
+    background-color: var(--dt-status-delayed-color);
+}
+
+.datatable-container .ventana{
+    background: #ff8000;
+    width: 30%;
+    color: white;
+    font-style: 12px;
+    text-align: center;
+    align-items: center;
+    padding: var(--dt-padding-xs);
+    min-height: 250px;
+    border-radius: 20px;
+    position: absolute;
+    left: 35%;
+    backdrop-filter: blur(20px);
+    display: none;
+}
+
+.datatable-container .ventana form h2{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.datatable-container .ventana form input{
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+}
+
+.datatable-container .ventana form input button{
+   padding: 20px 80px;
+   margin-top: 80px;
+   border: none;
+   font-size: 14px;
+   cursor: pointer;
+   outline: var(--dt-border-color); 
+}
+
+.datatable-container .ventanaB{
+    background: #ff8000;
+    width: 30%;
+    color: white;
+    font-style: 12px;
+    text-align: center;
+    align-items: center;
+    padding: var(--dt-padding-xs);
+    min-height: 250px;
+    border-radius: 20px;
+    position: absolute;
+    left: 35%;
+    backdrop-filter: blur(20px);
+    display: none;
+}
+
+.datatable-container .ventanaB form h2{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.datatable-container .ventanaB form input{
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+}
+
+.datatable-container .ventanaB form input button{
+   padding: 20px 80px;
+   margin-top: 80px;
+   border: none;
+   font-size: 14px;
+   cursor: pointer;
+   outline: none; 
+   
+}

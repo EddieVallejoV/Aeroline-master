@@ -1,0 +1,15 @@
+2021-09-25 10:48:03 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NUMERO[*] VUELOS"; SQL statement:
+NUMERO VUELOS [42000-200]
+2021-09-25 10:48:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NUMERO[*]"; SQL statement:
+NUMERO [42000-200]
+2021-09-25 13:35:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NUMERO[*]"; SQL statement:
+NUMERO [42000-200]
+2021-09-25 13:35:50 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NUMERO[*] [14]"; SQL statement:
+NUMERO [14] [42000-200]
+2021-09-25 13:35:56 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NUMERO[*][14]"; SQL statement:
+NUMERO[14] [42000-200]
